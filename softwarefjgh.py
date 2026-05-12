@@ -4,13 +4,12 @@
 # Gestiona clientes, servicios y reservas
 
 from logger import logger
-from Excepciones import Nombreinvalidoerror, Dniinvalidoerror, Correoivalidoerror, Telefónoinvalidoerror, Tiempoinvalidoerror, Servicioinvalidoerror
+from Excepciones import Nombreinvalidoerror, Dniinvalidoerror, Correoinvalidoerror, Telefónoinvalidoerror, Tiempoinvalidoerror, Servicioinvalidoerror
 from abc import ABC, abstractmethod
 
 
 # ------------------------------------------------------------------ #
 # Clase abstracta base para los servicios                             #
-# ------------------------------------------------------------------ #
 
 class servicios(ABC):
     # Todo servicio debe tener precio, descripción y tipo
@@ -29,10 +28,11 @@ class servicios(ABC):
 
 # ------------------------------------------------------------------ #
 # Clases de servicios específicos, heredan de servicios               #
-# ------------------------------------------------------------------ #
+
 
 class reserva_salas(servicios):
-    # Calcula el precio según horas, impuesto y descuento
+    def tipo(self):
+        print("reserva de salas")
     def precio(self, impuesto=8000, descuento=0, tiempo_reserva=0):
         precio_hora = 20000
         precio_inicial = tiempo_reserva * precio_hora + impuesto
@@ -47,7 +47,8 @@ class reserva_salas(servicios):
 
 
 class alquiler_equipos(servicios):
-    # Precio por hora más bajo que las salas
+    def tipo(self):
+        print("alquiler de equipos")
     def precio(self, impuesto=6000, descuento=0, tiempo_reserva=0):
         precio_hora = 10000
         precio_inicial = tiempo_reserva * precio_hora + impuesto
@@ -62,7 +63,8 @@ class alquiler_equipos(servicios):
 
 
 class asesorías(servicios):
-    # Mismo precio por hora que salas pero diferente servicio
+    def tipo(self):
+        print("asesorías")
     def precio(self, impuesto=5000, descuento=0, tiempo_reserva=0):
         precio_hora = 20000
         precio_inicial = tiempo_reserva * precio_hora + impuesto
@@ -78,7 +80,7 @@ class asesorías(servicios):
 
 # ------------------------------------------------------------------ #
 # Clase cliente con validaciones para cada dato personal              #
-# ------------------------------------------------------------------ #
+
 
 class cliente():
     def __init__(self):
@@ -140,8 +142,8 @@ class cliente():
                     ("gmail" not in _correo and "yahoo" not in _correo and "outlook" not in _correo) or
                     len(_correo) > 40 or
                     len(_correo) < 5):
-                    raise Correoivalidoerror("El correo electrónico debe contener '@' y '.', no puede comenzar ni terminar con '@' o '.', no puede contener espacios, debe ser un correo válido de Gmail, Yahoo o Outlook, y debe tener entre 5 y 40 caracteres.")
-            except Correoivalidoerror as e:
+                    raise Correoinvalidoerror("El correo electrónico debe contener '@' y '.', no puede comenzar ni terminar con '@' o '.', no puede contener espacios, debe ser un correo válido de Gmail, Yahoo o Outlook, y debe tener entre 5 y 40 caracteres.")
+            except Correoinvalidoerror as e:
                 print(f"Error: {e}")
                 logger.warning(f"El correo electrónico ingresado es inválido: '{_correo}'")
             else:
@@ -158,7 +160,7 @@ class cliente():
 
 # ------------------------------------------------------------------ #
 # Clase reserva, une cliente y servicio                               #
-# ------------------------------------------------------------------ #
+
 
 class reserva():
     def __init__(self, servicios, cliente):
@@ -209,7 +211,7 @@ class reserva():
 
 # ------------------------------------------------------------------ #
 # Selección del servicio antes de arrancar el sistema                 #
-# ------------------------------------------------------------------ #
+
 
 while True:
     try:
@@ -232,19 +234,22 @@ while True:
         logger.info("Intento de selección de servicio finalizado")
 
 
-# ------------------------------------------------------------------ #
-# Bloque principal, aquí se ejecuta todo el sistema                   #
-# ------------------------------------------------------------------ #
+
+
+
+#---------------------------------------------------------------------------------
 
 if __name__ == "__main__":
 
     print("=== Bienvenido a Software FJ ===")
 
-    # Registramos el cliente
+    # Operación 1: Selección de servicio (ocurre arriba con el while)
+
+    # Operación 2: Registro de cliente
     print("\n--- Registro de cliente ---")
     c1 = cliente()
 
-    # Creamos el servicio según lo que eligió
+    # Operación 3: Crear el servicio según elección
     print("\n--- Creando servicio ---")
     if servicio == "reserva de salas":
         s1 = reserva_salas()
@@ -253,14 +258,33 @@ if __name__ == "__main__":
     elif servicio == "asesorías":
         s1 = asesorías()
 
-    # Creamos la reserva uniendo cliente y servicio
+    # Operación 4: Mostrar descripción del servicio
+    print("\n--- Descripción del servicio ---")
+    s1.descripción()
+
+    # Operación 5: Crear reserva y validar tiempo
     print("\n--- Creando reserva ---")
     r1 = reserva(s1, c1)
 
-    # Calculamos el precio con descuento opcional
-    print("\n--- Calculando precio ---")
-    descuento = int(input("Ingrese el descuento a aplicar (si no desea aplicar descuento, ingrese 0): "))
+    # Operación 6: Calcular precio sin descuento
+    print("\n--- Precio sin descuento ---")
+    r1.calcular_precio()
+
+    # Operación 7: Calcular precio con descuento
+    print("\n--- Precio con descuento ---")
+    descuento = int(input("Ingrese el descuento a aplicar (0 si no desea): "))
     r1.calcular_precio(descuento=descuento)
 
-    # Confirmamos la reserva
+    # Operación 8: Calcular precio con descuento e impuesto
+    print("\n--- Precio con descuento e impuesto ---")
+    r1.calcular_precio(descuento=descuento, impuesto=3000)
+
+    # Operación 9: Confirmar reserva
+    print("\n--- Confirmación de reserva ---")
     r1.confirmación()
+
+    # Operación 10: Cancelar reserva
+    print("\n--- Cancelación de reserva ---")
+    r1.cancelación()
+
+

@@ -1,0 +1,20 @@
+2026-05-11 23:05:43,672 - INFO - Intento de selección de servicio finalizado
+2026-05-11 23:05:52,322 - INFO - Se seleccionó el servicio correctamente: 'asesorías'
+2026-05-11 23:05:52,327 - INFO - Intento de selección de servicio finalizado
+2026-05-11 23:05:57,187 - INFO - Se registró el nombre correctamente: 'Jorge'
+2026-05-11 23:06:01,119 - WARNING - El DNI ingresado es inválido: '1055360162'
+2026-05-11 23:06:17,250 - INFO - Se registró el DNI correctamente: '1055360'
+2026-05-11 23:06:21,384 - WARNING - El número de teléfono ingresado es inválido: '3217815153'
+2026-05-11 23:06:26,010 - WARNING - El número de teléfono ingresado es inválido: '321781'
+2026-05-11 23:06:37,763 - INFO - Se registró el número de teléfono correctamente: '321781515'
+2026-05-11 23:06:46,117 - INFO - Se registró el correo electrónico correctamente: 'george292007@gmail.com'
+2026-05-11 23:10:05,275 - INFO - Se seleccionó el servicio correctamente: 'asesorías'
+2026-05-11 23:10:05,277 - INFO - Intento de selección de servicio finalizado
+2026-05-11 23:10:07,524 - INFO - Se registró el nombre correctamente: 'jorge'
+2026-05-11 23:10:14,544 - INFO - Se registró el DNI correctamente: '1055360'
+2026-05-11 23:10:19,553 - INFO - Se registró el número de teléfono correctamente: '321781515'
+2026-05-11 23:10:26,721 - WARNING - El correo electrónico ingresado es inválido: 'george292007@gmail,com'
+2026-05-11 23:10:44,005 - WARNING - El correo electrónico ingresado es inválido: 'george'
+2026-05-11 23:10:50,338 - INFO - Se registró el correo electrónico correctamente: 'george@gmail.com'
+2026-05-11 23:10:57,432 - INFO - Se registró el tiempo de reserva correctamente: '3' horas
+2026-05-11 23:10:57,433 - INFO - Intento de registro de tiempo finalizado

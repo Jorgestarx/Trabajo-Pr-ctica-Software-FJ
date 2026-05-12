@@ -6,7 +6,7 @@ class nombreinvalidoerror(Exception):
 class dniinvalidoerror(Exception):
     pass
 
-class correoivalidoerror(Exception):
+class correoinvalidoerror(Exception):
     pass
 
 class telefónoinvalidoerror(Exception):
